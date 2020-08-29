@@ -36,7 +36,15 @@ class ProductController {
     }
 
     static async destroy (req, res) {
+        try {
+            const product = await Product.findByPk(req.params.id)
+            if (!product) return res.status(404).json(response('fail', 'product not found'))
 
+            await Product.destroy({ where: { id: req.params.id } })
+            res.status(200).json(response('success', 'product destroyed'))
+        } catch (err) {
+            res.status(500).json(response('fail', err.message))
+        }
     }
 
     static async getById (req, res) {
