@@ -16,7 +16,12 @@ class ProductOutController {
     }
 
     static async create (req, res) {
-
+        try {
+            const productOut = await ProductOut.create({ ...req.body.data })
+            res.status(201).json(response('success', 'product-out created', productOut))
+        } catch (err) {
+            res.status(500).json(response('fail', err.message))
+        }
     }
 
     static async update (req, res) {
