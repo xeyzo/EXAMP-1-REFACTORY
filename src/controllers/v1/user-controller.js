@@ -62,7 +62,6 @@ class UserController {
         }catch(err){
             res.status(500).json(response('fail', err.message))
         }
-    
     }
 
 }
