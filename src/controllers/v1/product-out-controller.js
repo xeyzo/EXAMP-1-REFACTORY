@@ -1,11 +1,18 @@
 const response = require('../../helpers/response')
-const { ProductOut } = require('../../database/models')
+const { ProductOut, Product } = require('../../database/models')
 
 class ProductOutController {
     static async getAll (req, res) {
-        const productOuts = await ProductOut.findAll({
-            
-        })
+        try {
+            const productOuts = await ProductOut.findAll({
+                include: [
+                    { model: Product, as: 'product' }
+                ]
+            })
+            res.status(200).json(response('success', 'product-out fetched', productOuts))
+        } catch (err) {
+            res.status(500).json(response('fail', err.message))
+        }
     }
 
     static async create (req, res) {
