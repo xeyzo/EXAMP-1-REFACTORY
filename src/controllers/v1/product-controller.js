@@ -4,8 +4,8 @@ const { Product } = require('../../database/models')
 class ProductController {
     static async getAll (req, res) {
         try {
-        const products = await Product.findAll()
-        res.status(200).json(response('success', 'products fetched', products))
+            const products = await Product.findAll()
+            res.status(200).json(response('success', 'products fetched', products))
         } catch (err) {
             res.status(500).json(response('fail', err.message))
         }
@@ -48,7 +48,18 @@ class ProductController {
     }
 
     static async getById (req, res) {
+        try {
+            const product = await Product.findOne({
+                where: {
+                    id: req.params.id
+                }
+            })
+            if (!product) return res.status(404).json(response('fail', 'product not found'))
 
+            res.status(200).json(response('success', 'get product by id', product))
+        } catch (err) {
+            res.status(500).json(response('fail', err.message))
+        }
     }
 }
 
