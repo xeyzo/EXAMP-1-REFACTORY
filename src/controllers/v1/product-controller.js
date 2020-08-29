@@ -3,8 +3,12 @@ const { Product } = require('../../database/models')
 
 class ProductController {
     static async getAll (req, res) {
+        try {
         const products = await Product.findAll()
         res.status(200).json(response('success', 'products fetched', products))
+        } catch (err) {
+            res.status(500).json(response('fail', err.message))
+        }
     }
 
     static async create (req, res) {
