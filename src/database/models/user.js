@@ -10,14 +10,16 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.hasMany(models.Product, { foreignKeyConstraint: true })
     }
   };
   User.init({
-    full_name: DataTypes.STRING,
+    fullname: DataTypes.STRING,
     username: DataTypes.STRING,
     email: DataTypes.STRING,
     phone_number: DataTypes.STRING,
+    salt: DataTypes.STRING,
+    password: DataTypes.STRING,
     role: DataTypes.STRING
   }, {
     sequelize,
