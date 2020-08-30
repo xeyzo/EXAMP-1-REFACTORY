@@ -1,7 +1,7 @@
 const response = require('../../helpers/response')
 const { User } = require ('../../database/models')
 const bcrypt = require("bcrypt")
-
+const paginateData = require('../../helpers/paginate-data')
 
 class UserController {
     static async create(req, res) {
@@ -31,9 +31,17 @@ class UserController {
 
     static async read (req, res){
         try{
-            const user = await User.findall({ attributes: ["username", "email", "full_name","phone_number"],
+            const paginate = paginateData({
+                limit: req.query.limit,
+                page: req.query.page,
+                total: await Product.count()
             })
-            res.status(200).json(response('success', 'get all data user', user))
+            const user = await User.findall({ 
+                attributes: ["username", "email", "full_name","phone_number"],
+                limit: paginate.limit,
+                offset: paginate.page,
+            })
+            res.status(200).json(response('success', 'get all data user', { data: user, ...paginate.data }))
         }catch(err){
             rest.status(500).json(response('fail', err.message))
         }

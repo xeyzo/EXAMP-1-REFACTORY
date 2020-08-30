@@ -1,15 +1,23 @@
 const response = require('../../helpers/response')
 const { ProductOut, Product, User } = require('../../database/models')
+const paginateData = require('../../helpers/paginate-data')
 
 class ProductOutController {
     static async getAll (req, res) {
         try {
+            const paginate = paginateData({
+                limit: req.query.limit,
+                page: req.query.page,
+                total: await Product.count()
+            })
             const productOuts = await ProductOut.findAll({
+                offset: paginate.page,
+                limit: paginate.limit,
                 include: [
                     { model: Product, as: 'product', include: [ { model: User, as: 'supplier' } ] }
                 ]
             })
-            res.status(200).json(response('success', 'product-out fetched', productOuts))
+            res.status(200).json(response('success', 'product-out fetched', { data: productOuts, ...paginate.data }))
         } catch (err) {
             res.status(500).json(response('fail', err.message))
         }
