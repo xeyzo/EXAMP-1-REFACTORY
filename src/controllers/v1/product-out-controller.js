@@ -6,7 +6,7 @@ class ProductOutController {
         try {
             const productOuts = await ProductOut.findAll({
                 include: [
-                    { model: Product, as: 'product', include: [ { model: User, as: 'supplier' } ] }
+                    { model: Product, as: 'product'/*, include: [ { model: User, as: 'supplier' } ]*/ }
                 ]
             })
             res.status(200).json(response('success', 'product-out fetched', productOuts))
