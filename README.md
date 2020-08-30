@@ -11,3 +11,9 @@ main task
 8. Implementasi nodemailer ✅
 9. Implementasi cloudinary ✅
 10. Print out ✅
+
+## Taufik Task
+1, 2, 5, 8, 10
+
+## Sandi Task
+3, 4, 6, 7, 9
