@@ -1,15 +1,33 @@
 const response = require('../../helpers/response')
-const { User } = require ('../../database/models/user')
+const { User } = require ('../../database/models')
+const bcrypt = require("bcrypt")
+
 
 class UserController {
-    static async create (req, res) {
-        try{
-            const user = await User.create({ ...req.body.data })
-            res.status(200).json(response('success', 'user created', user))
-        }catch(err){
+    static async create(req, res) {
+        try {
+        const data =  await User.findOne({ where: { username: req.body.username } })
+        if (data == null) {
+        const hash = bcrypt.hashSync(req.body.password, 10)
+        const salt = bcrypt.hashSync(req.body.salt, 10)
+        const user = await User.create({ 
+            full_name: req.body.full_name,
+            username: req.body.username,
+            email: req.body.email,
+            phone_number: req.body.phone_number,
+            salt: salt,
+            password: hash,
+            role: req.body.role
+            })
+            res.status(201).json(response('success', 'new user created',  user.dataValues.username))
+        }else{
+            throw new Error("Username has been taken")
+        }
+        } catch (err) {
             res.status(500).json(response('fail', err.message))
-        }        
+        }
     }
+
 
     static async read (req, res){
         try{
@@ -24,7 +42,7 @@ class UserController {
     static async find (req, res){
         const { id } = req.params;
         try{
-            const userdetail = await models.User.findByPk(id);
+            const userdetail = await User.findByPk(id);
             if(!userdetail) throw new Error("User not found");
             res.status(200).json(response('success', 'get all data user', userdetail))
         }catch(err){
