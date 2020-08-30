@@ -37,10 +37,9 @@ class AuthController {
 
     static async currentUser (req, res) {
         try {
-            const id = req.userId
             const user = await User.findOne({
                 where: {
-                    id: id
+                    id: req.user.id
                 },
                 // include: [
                 //     { model: Product, as: 'products' }
