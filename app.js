@@ -9,6 +9,7 @@ const usersRouter = require('./src/routes/v1/users');
 const productInRouter = require('./src/routes/v1/product-in');
 const productRouter = require('./src/routes/v1/products')
 const productOutRouter = require('./src/routes/v1/product-out')
+const reportRouter = require('./src/routes/v1/report')
 const authRouter = require('./src/routes/v1/auth')
 const authToken = require('./src/middleware/auth-token')
 
@@ -27,8 +28,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api/v1/users', authToken, usersRouter);
 app.use('/api/v1/products', authToken, productRouter)
+app.use('/api/v1/in', authToken, productInRouter)
 app.use('/api/v1/out', authToken, productOutRouter)
 app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/print', authToken, reportRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

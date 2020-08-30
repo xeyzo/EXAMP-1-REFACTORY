@@ -14,7 +14,7 @@ class ProductOutController {
                 offset: paginate.page,
                 limit: paginate.limit,
                 include: [
-                    { model: Product, as: 'product', include: [ { model: User, as: 'supplier' } ] }
+                    { model: Product, as: 'product'/*, include: [ { model: User, as: 'supplier' } ]*/ }
                 ]
             })
             res.status(200).json(response('success', 'product-out fetched', { data: productOuts, ...paginate.data }))
