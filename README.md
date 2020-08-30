@@ -9,5 +9,5 @@ main task
 6. Struktur json respon/request ✅
 7. Paginasi ✅
 8. Implementasi nodemailer ✅
-9. Implementasi cloudinary
+9. Implementasi cloudinary ✅
 10. Print out ✅
