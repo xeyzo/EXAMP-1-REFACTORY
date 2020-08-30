@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken')
 class AuthController {
     static async signup (req, res) {
         try {
-            req.body.data.password = await bcrypt.hash(req.body.data.password, req.body.data.salt.length)
+            req.body.data.password = await bcrypt.hash(req.body.data.password, 10)
             const user = await User.create({ ...req.body.data })
             res.status(201).json(response('success', 'signup success', user))
         } catch (err) {
