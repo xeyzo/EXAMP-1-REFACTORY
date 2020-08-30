@@ -8,6 +8,6 @@ main task
 5. Middleware auth ✅
 6. Struktur json respon/request ✅
 7. Paginasi ✅
-8. Implementasi nodemailer 
+8. Implementasi nodemailer ✅
 9. Implementasi cloudinary
-10. Print out
+10. Print out ✅
