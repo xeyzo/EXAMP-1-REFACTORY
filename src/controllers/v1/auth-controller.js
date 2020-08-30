@@ -41,9 +41,9 @@ class AuthController {
                 where: {
                     id: req.user.id
                 },
-                // include: [
-                //     { model: Product, as: 'products' }
-                // ]
+                include: [
+                    { model: Product }
+                ]
             })
 
             res.status(200).json(response('success', 'current user', user))

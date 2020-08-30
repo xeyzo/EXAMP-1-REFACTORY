@@ -24,6 +24,7 @@ class ProductController {
     }
 
     static async create (req, res) {
+        req.body.data.userId = req.user.id
         try {
             const product = await Product.create({ ...req.body.data })
             res.status(201).json(response('success', 'product created', product))

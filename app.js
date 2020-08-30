@@ -28,7 +28,7 @@ app.use('/', indexRouter);
 app.use('/api/v1/users', authToken, usersRouter);
 app.use('/api/v1/products', authToken, productRouter)
 app.use('/api/v1/out', authToken, productOutRouter)
-app.use('/api/v1/auth', authToken, authRouter)
+app.use('/api/v1/auth', authRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
