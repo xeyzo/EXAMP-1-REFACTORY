@@ -25,9 +25,15 @@ class ProductInController {
     }
 
     static async find (req, res) {
-        const { id } = req.params;
-        const data = await In.findByPk(id);
-        try {
+    try {
+        const data = await In.findByPk({
+            where: {
+                id: req.params.id
+            },
+            include: [
+                { model: Product, as: 'product' }
+            ]
+        })
         if (!data) throw new Error("Data not found");
             res.status(200).json(response('success', 'get data by id', data));
         } catch (error) {
