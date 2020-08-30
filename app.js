@@ -4,8 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./src/routes/index');
-var usersRouter = require('./src/routes/v1/users');
+const indexRouter = require('./src/routes/index');
+const usersRouter = require('./src/routes/v1/users');
+const productInRouter = require('./src/routes/v1/product-in');
 const productRouter = require('./src/routes/v1/products')
 const productOutRouter = require('./src/routes/v1/product-out')
 const authRouter = require('./src/routes/v1/auth')
