@@ -1,10 +1,14 @@
 const response = require('../../helpers/response')
-const { Product } = require('../../database/models')
+const { Product, User } = require('../../database/models')
 
 class ProductController {
     static async getAll (req, res) {
         try {
-            const products = await Product.findAll()
+            const products = await Product.findAll({
+                include: [
+                    { model: User, as: 'supplier' }
+                ]
+            })
             res.status(200).json(response('success', 'products fetched', products))
         } catch (err) {
             res.status(500).json(response('fail', err.message))
@@ -52,7 +56,10 @@ class ProductController {
             const product = await Product.findOne({
                 where: {
                     id: req.params.id
-                }
+                },
+                include: [
+                    { model: User, as: 'supplier' }
+                ]
             })
             if (!product) return res.status(404).json(response('fail', 'product not found'))
 
