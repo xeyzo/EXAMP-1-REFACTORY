@@ -6,9 +6,9 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "bull": "^3.18.0",
     "bull-board": "^0.9.0",
-    "bcrypt": "^5.0.0",
     "cloudinary": "^1.23.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
