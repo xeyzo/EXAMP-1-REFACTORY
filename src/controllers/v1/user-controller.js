@@ -1,5 +1,5 @@
 const response = require('../../helpers/response')
-const { User } = require ('../../database/models/user')
+const { User } = require ('../../database/models/')
 
 class UserController {
     static async create (req, res) {
@@ -13,11 +13,11 @@ class UserController {
 
     static async read (req, res){
         try{
-            const user = await User.findall({ attributes: ["username", "email", "full_name","phone_number"],
+            const user = await User.findAll({ attributes: ["username", "email", "full_name","phone_number"],
             })
             res.status(200).json(response('success', 'get all data user', user))
         }catch(err){
-            rest.status(500).json(response('fail', err.message))
+            res.status(500).json(response('fail', err.message))
         }
     }
 
@@ -28,7 +28,7 @@ class UserController {
             if(!userdetail) throw new Error("User not found");
             res.status(200).json(response('success', 'get all data user', userdetail))
         }catch(err){
-            rest.status(500).json(response('fail', err.message))
+            res.status(500).json(response('fail', err.message))
         }
     }
 
