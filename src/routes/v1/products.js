@@ -1,10 +1,11 @@
 const router = require('express').Router()
 const ProductController = require('../../controllers/v1/product-controller')
+const cloudinary = require('../../middleware/cloudinary')
 
 router.get('/', ProductController.getAll)
-    .post('/', ProductController.create)
+    .post('/', cloudinary.single('photo'), ProductController.create)
 
-router.put('/:id', ProductController.update)
+router.put('/:id', cloudinary.single('photo'), ProductController.update)
     .delete('/:id', ProductController.destroy)
     .get('/:id', ProductController.getById)
 

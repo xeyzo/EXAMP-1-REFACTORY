@@ -24,9 +24,10 @@ class ProductController {
     }
 
     static async create (req, res) {
-        req.body.data.userId = req.user.id
+        req.body.userId = req.user.dataValues.id
+        req.body.photo = req.file.path
         try {
-            const product = await Product.create({ ...req.body.data })
+            const product = await Product.create({ ...req.body })
             res.status(201).json(response('success', 'product created', product))
         } catch (err) {
             res.status(500).json(response('fail', err.message))

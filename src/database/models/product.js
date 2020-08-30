@@ -35,7 +35,8 @@ module.exports = (sequelize, DataTypes) => {
         isNumeric: true
       }
     },
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    photo: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Product',
