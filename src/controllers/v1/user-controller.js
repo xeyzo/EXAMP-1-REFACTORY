@@ -1,5 +1,5 @@
 const response = require('../../helpers/response')
-const { User } = require ('../../database/models')
+const { User } = require ('../../database/models/')
 const bcrypt = require("bcrypt")
 const paginateData = require('../../helpers/paginate-data')
 
@@ -43,7 +43,7 @@ class UserController {
             })
             res.status(200).json(response('success', 'get all data user', { data: user, ...paginate.data }))
         }catch(err){
-            rest.status(500).json(response('fail', err.message))
+            res.status(500).json(response('fail', err.message))
         }
     }
 
@@ -54,7 +54,7 @@ class UserController {
             if(!userdetail) throw new Error("User not found");
             res.status(200).json(response('success', 'get all data user', userdetail))
         }catch(err){
-            rest.status(500).json(response('fail', err.message))
+            res.status(500).json(response('fail', err.message))
         }
     }
 
